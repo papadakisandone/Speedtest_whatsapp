@@ -1,5 +1,7 @@
+"""
+Be sure that u have close the chrome browser before you run it
+"""
 import time
-
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -12,13 +14,13 @@ class InternetSpeedTwitterBot:
         self.ping = 0
         self.down = 0
         self.up = 0
-        self.whatsapp_contact = "Baby"
+        self.whatsapp_contact = "Baby" # here put the name of your whats up contact
 
-        self.chrome_driver_path = "c:\Development\chromedriver.exe"
+        self.chrome_driver_path = "c:\Development\chromedriver.exe" # here put yout path from the chromedriver
 
         self.options = webdriver.ChromeOptions()
         self.options.add_argument(
-            r'--user-data-dir=C:\Users\jojob\AppData\Local\Google\Chrome\User Data')
+            r'--user-data-dir=C:\Users\jojob\AppData\Local\Google\Chrome\User Data') # here put yout path
 
         self.driver = webdriver.Chrome(executable_path=self.chrome_driver_path, options=self.options)
 
@@ -48,9 +50,6 @@ class InternetSpeedTwitterBot:
         up_speed = WebDriverWait(self.driver, 45).until(
             EC.presence_of_element_located((By.CLASS_NAME, "upload-speed")))
 
-        # print(ping.text)
-        # print(down_speed.text)
-        # print(up_speed.text)
         return ping.text, down_speed.text, up_speed.text
 
     def whatsapp_send(self):
@@ -59,7 +58,6 @@ class InternetSpeedTwitterBot:
         time.sleep(3)
 
         # select the contact to send the msg
-        # contact = self.driver.find_element_by_css_selector("[title=\'Baby\']") # or
         contact = self.driver.find_element_by_css_selector(f"[title={self.whatsapp_contact}]")
         contact.click()
 
